@@ -143,6 +143,12 @@
     <ClCompile Include="utils.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="choice.h" />
+    <ClInclude Include="file.h" />
+    <ClInclude Include="listQ.h" />
+    <ClInclude Include="menu.h" />
+    <ClInclude Include="random.h" />
+    <ClInclude Include="user.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

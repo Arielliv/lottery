@@ -1,0 +1,2 @@
+C:\Users\ariel7342\Projects\lottery\x64\Debug\lottery.exe
+C:\Users\ariel7342\Projects\lottery\x64\Debug\lottery.pdb
