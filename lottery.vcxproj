@@ -140,6 +140,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.c" />
+    <ClCompile Include="menu.c" />
+    <ClCompile Include="random.c" />
     <ClCompile Include="utils.c" />
   </ItemGroup>
   <ItemGroup>

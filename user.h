@@ -6,6 +6,7 @@ typedef struct user {
 	char* name;
 	ListQ* list;
 	double avrageOfHits;
+	bool isAuto;
 	int numOfQs;
 } User;
 
@@ -18,7 +19,7 @@ void makeEmptyUsersList(ListUsers* lst);
 
 void insertDataToEndListUsers(ListUsers* lst, char data);
 
-LNodeQ* createNewUser(char* name, ListQ* list, double avarageOfHits, int numOfQs, User* next);
+LNodeQ* createNewUser(char* name, ListQ* list, double avarageOfHits, int numOfQs, bool isAuto, User* next);
 
 bool isEmptyListUsers(ListUsers* lst);
 
@@ -34,7 +35,7 @@ int getUserNumOfQs(int numOfQs, User* user);
 
 double getUserAvarageOfHits(double avarage, User* user);
 
-User* getUserWithHighestScore(listUsers* ListOfUsers);
+User* getUserWithHighestScore(ListUsers* ListOfUsers);
 
 
 

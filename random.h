@@ -1,6 +1,6 @@
 #pragma once
 
-int getRandomNum(int min, int max);
+int getRandomNum(int min, int amount);
 
 
 

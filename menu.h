@@ -16,7 +16,15 @@ void createNewLottery();
 
 int getNumerOfParticipants();
 
-bool getUserLotteryType();
+char* getParticipantName();
+
+bool getIsAutoLottery();
+
+int getNumberOfUserQs();
+
+ListQ* createListOfUserQs(bool isAutoLottery);
+
+ListUsers* setupUsersList(int numberOfParticipants);
 
 void printUserLotteryOptions();
 
@@ -24,4 +32,4 @@ void printLotteryResults();
 
 Choice* createWinningRandomQ();
 
-void printSortedListOfQs(listQ ListOfQs);
+void printSortedListOfQs(ListQ ListOfQs);
