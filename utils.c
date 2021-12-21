@@ -21,6 +21,7 @@ char* getDynamicStringInput() {
 	str = (char*)malloc(sizeof(char) * phySize);
 	checkMemoryAllocation(str);
 	c = getchar();
+	c = getchar();
 	while (c != '\n') {
 		if (logSize == phySize) {
 			phySize *= 2;

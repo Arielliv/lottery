@@ -1,6 +1,7 @@
 #pragma once
 
 #include "listQ.h"
+#include <stdlib.h>
 
 typedef struct user {
 	char* name;
@@ -8,6 +9,7 @@ typedef struct user {
 	double avrageOfHits;
 	bool isAuto;
 	int numOfQs;
+	struct user* next;
 } User;
 
 typedef struct listUsers {
@@ -17,9 +19,9 @@ typedef struct listUsers {
 
 void makeEmptyUsersList(ListUsers* lst);
 
-void insertDataToEndListUsers(ListUsers* lst, char data);
+void insertDataToEndListUsers(ListUsers* lst, char* name, ListQ* list, int numOfQs,  double avarageOfHits, bool isAuto);
 
-LNodeQ* createNewUser(char* name, ListQ* list, double avarageOfHits, int numOfQs, bool isAuto, User* next);
+User* createNewUser(char* name, ListQ* list, double avarageOfHits, int numOfQs, bool isAuto, User* next);
 
 bool isEmptyListUsers(ListUsers* lst);
 

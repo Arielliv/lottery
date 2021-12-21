@@ -30,6 +30,12 @@
     <ClCompile Include="user.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="choice.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="listQ.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="utils.h">

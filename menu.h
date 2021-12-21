@@ -25,7 +25,7 @@ bool getIsAutoLottery();
 
 int getNumberOfUserQs();
 
-ListQ* createListOfUserQs(bool isAutoLottery);
+ListQ* createListOfUserQs(bool isAutoLottery, int numOfUserQs);
 
 ListUsers* setupUsersList(int numberOfParticipants);
 

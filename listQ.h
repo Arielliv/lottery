@@ -1,29 +1,31 @@
 #pragma once
-
+#include <stdio.h>
 #include "choice.h"
+#include "utils.h"
 
 typedef struct lNodeQ {
-    int totalCountOfHits;
-    Choice * choices;
-    struct lNodeQ* next;
+	int totalCountOfHits;
+	Choice** choices;
+	struct lNodeQ* next;
 } LNodeQ;
 
-typedef struct listQ{
-    LNodeQ* head;
-    LNodeQ* tail;
+typedef struct listQ {
+	LNodeQ* head;
+	LNodeQ* tail;
 } ListQ;
 
 void makeEmptyListQ(ListQ* lst);
 
-void insertDataToEndListQ(ListQ* lst, char data);
+void insertDataToEndListQ(ListQ* lst, Choice** choices, int length, int totalCountOfHits);
 
-LNodeQ* createNewLNodeQ(char data, LNodeQ* next);
+void insertNodeToEndListNode(ListQ* lst, LNodeQ* newTail);
+
+LNodeQ* createNewLNodeQ(Choice** choices,int length, int totalCountOfHits, LNodeQ* next);
 
 bool isEmptyListQ(ListQ* lst);
 
-void insertNodeToEndListQ(LNodeQ* lNodeQ, LNodeQ* newTail);
+void insertNodeToEndListQ(ListQ* lst, LNodeQ* newTail);
 
 int getNumOfLNodeQByNumOfHits(ListQ* lst, int numOfHits);
 
 int getLNodeQNumOfHits(LNodeQ* lNodeQ);
-
