@@ -1,5 +1,2 @@
-﻿  main.c
-  menu.c
-C:\Users\ariel7342\Projects\lottery\menu.c(5,8): warning C4013: 'printf' undefined; assuming extern returning int
-  Generating Code...
+﻿  utils.c
   lottery.vcxproj -> C:\Users\ariel7342\Projects\lottery\x64\Debug\lottery.exe

@@ -2,11 +2,14 @@
 #define manual 1
 #define auto 0
 
+#include <stdlib.h>
+#include <stdio.h>
 #include "choice.h"
 #include "listQ.h"
 #include "random.h"
 #include "user.h"
 #include "file.h"
+#include "utils.h"
 
 void showMenu();
 

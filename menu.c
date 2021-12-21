@@ -1,9 +1,10 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "menu.h"
+
 #define ExitSign 3
 
 void showMenu() {
-	int userChoice, numberOfParticipants;
+	int userChoice = 0, numberOfParticipants;
 	ListUsers* users;
 	printf("welcome to out grand lottery game !!!\n");
 	while (userChoice != ExitSign) {
@@ -16,10 +17,10 @@ void showMenu() {
 			"\n"
 			"3 - exit\n"
 		);
-		scanf("%d", userChoice);
+		scanf("%d", &userChoice);
 		if (userChoice == 1) {
 			numberOfParticipants = getNumerOfParticipants();
-			users = setupUsersList();
+			users = setupUsersList(numberOfParticipants);
 		}
 		else if (userChoice == 2) {
 		}
@@ -35,7 +36,7 @@ int getNumerOfParticipants() {
 	bool isNumberValid = false;
 	while (isNumberValid == false) {
 		printf("Please enter number of participants\n");
-		scanf("%d", numberOfParticipants);
+		scanf("%d", &numberOfParticipants);
 		if (numberOfParticipants <= 0) {
 			printf("number have to be bigger then 0, try again\n");
 		}
@@ -60,7 +61,7 @@ bool getIsAutoLottery() {
 			"1- Manual lottory\n"
 			"\n"
 			"2- Auto lottery\n");
-		scanf("%d", userChoice);
+		scanf("%d", &userChoice);
 		if (userChoice < 1 && userChoice >2) {
 			printf("wrong input - try again.\n");
 		}
@@ -81,7 +82,7 @@ int getNumberOfUserQs() {
 	bool isNumberValid = false;
 	while (isNumberValid == false) {
 		printf("Please enter number of lottery queues :\n");
-		scanf("%d", userChoice);
+		scanf("%d", &userChoice);
 		if (userChoice <0) {
 			printf("wrong input - try again.\n");
 		}
@@ -99,7 +100,7 @@ ListUsers* setupUsersList(int numberOfParticipants) {
 	char* name;
 	bool isAutoLottery;
 
-	makeEmptyUsersList(users);
+	//makeEmptyUsersList(users);
 
 	for (i = 0; i < numberOfParticipants; i++)
 	{

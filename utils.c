@@ -20,7 +20,6 @@ char* getDynamicStringInput() {
 	char c;
 	str = (char*)malloc(sizeof(char) * phySize);
 	checkMemoryAllocation(str);
-	printf("Please enter participant name\n");
 	c = getchar();
 	while (c != '\n') {
 		if (logSize == phySize) {
