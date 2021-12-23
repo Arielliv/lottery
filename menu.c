@@ -1,11 +1,12 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "menu.h"
 
-#define ExitSign 3
+
 
 void showMenu() {
 	int userChoice = 0, numberOfParticipants;
 	ListUsers* users;
+	PIsNumValid* pIsNumValid = isBiggerThenZeroNum;
 	printf("welcome to out grand lottery game !!!\n");
 	while (userChoice != ExitSign) {
 		printf("\n"
@@ -19,7 +20,7 @@ void showMenu() {
 		);
 		scanf("%d", &userChoice);
 		if (userChoice == 1) {
-			numberOfParticipants = getNumerOfParticipants();
+			numberOfParticipants = getNumberInput(msgParticipants, errorParticipants, isBiggerThenZeroNum);
 			users = setupUsersList(numberOfParticipants);
 		}
 		else if (userChoice == 2) {
@@ -34,74 +35,13 @@ void showMenu() {
 
 }
 
-int getNumerOfParticipants() {
-	int numberOfParticipants = 0;
-	bool isNumberValid = false;
-	while (isNumberValid == false) {
-		printf("Please enter number of participants :\n");
-		scanf("%d", &numberOfParticipants);
-		if (numberOfParticipants <= 0) {
-			printf("number have to be bigger then 0, try again\n");
-		}
-		else {
-			isNumberValid = true;
-		}
-	}
-	return numberOfParticipants;
-
-}
-
-char* getParticipantName() {
-	printf("Please enter participant name : \n");
-	return getDynamicStringInput();
-}
-
-bool getIsAutoLottery() {
-	int userChoice;
-	bool isNumberValid = false;
-	while (isNumberValid == false) {
-		printf("Please choose one of the following options and enter it's number :\n"
-			"1- Manual lottory\n"
-			"\n"
-			"2- Auto lottery\n");
-		scanf("%d", &userChoice);
-		if (userChoice < 1 && userChoice >2) {
-			printf("wrong input - try again.\n");
-		}
-		else {
-			isNumberValid = true;
-		}
-	}
-	if (userChoice == 1) {
-		return false;
-	}
-	else {
-		return true;
-	}
-}
-
-int getNumberOfUserQs() {
-	int userChoice;
-	bool isNumberValid = false;
-	while (isNumberValid == false) {
-		printf("Please enter number of lottery queues :\n");
-		scanf("%d", &userChoice);
-		if (userChoice <0) {
-			printf("wrong input - try again.\n");
-		}
-		else {
-			isNumberValid = true;
-		}
-	}
-	return userChoice;
-}
-
 ListUsers* setupUsersList(int numberOfParticipants) {
 	int i, numOfUserQs;
 	ListUsers users;
 	ListQ* userListQs;
 	char* name;
 	bool isAutoLottery;
+	PIsNumValid* pIsNumValid = isBiggerThenZeroNum;
 
 	makeEmptyUsersList(&users);
 
@@ -109,7 +49,7 @@ ListUsers* setupUsersList(int numberOfParticipants) {
 	{
 		name = getParticipantName();
 		isAutoLottery = getIsAutoLottery();
-		numOfUserQs = getNumberOfUserQs();
+		numOfUserQs = getNumberInput(msgQ, errorQ, pIsNumValid);
 		userListQs = createListOfUserQs(isAutoLottery, numOfUserQs);
 		insertDataToEndListUsers(&users, name,userListQs, numOfUserQs, 0, isAutoLottery);
 	}
@@ -123,28 +63,41 @@ ListQ* createListOfUserQs(bool isAutoLottery, int numOfUserQs) {
 	ListQ listQ;
 	makeEmptyListQ(&listQ);
 	
-
-	if (isAutoLottery == true) {
-		for (i = 0; i < numOfUserQs; i++) {
-			choices = (Choice**)calloc(6,sizeof(Choice*) * 6);
-			checkMemoryAllocation(choices);
-			for (j = 0; j < 6; j++) {
-				printf("\n index %d \n", j);
-				printChoices(choices, j);
-				tmpNumber = getRandomNum(1,15);
-				
-				while (getChoiceByDataFromArray(choices, j, tmpNumber) != NULL) {
-					tmpNumber = getRandomNum(1, 15);
-				}
-				
-				choices[j] = createNewChoice(tmpNumber, false);
-			}
-			insertDataToEndListQ(&listQ,choices,6, 0);
-		}
-	}
-	else {
-
-	}
+	fillUserQs(isAutoLottery, numOfUserQs, &listQ, choices);
 
 	return &listQ;
+}
+
+void fillUserQs(bool isAutoLottery, int numOfUserQs, ListQ* listQ, Choice** choices) {
+	int i, j, tmpNumber;
+	PIsNumValid* pIsNumValid = isValidChoiceNum;
+
+
+	for (i = 0; i < numOfUserQs; i++) {
+		choices = (Choice**)calloc(6, sizeof(Choice*) * 6);
+		checkMemoryAllocation(choices);
+		for (j = 0; j < 6; j++) {
+			printf("\n index %d \n", j);
+			printChoices(choices, j);
+			if (isAutoLottery == true) {
+				tmpNumber = getRandomNum(1, 15);
+			}
+			else {
+				tmpNumber = getNumberInput(msgQChoice, errorQChoice, pIsNumValid);
+			}
+			
+
+			while (getChoiceByDataFromArray(choices, j, tmpNumber) != NULL) {
+				if (isAutoLottery == true) {
+					tmpNumber = getRandomNum(1, 15);
+				}
+				else {
+					tmpNumber = getNumberInput(msgQChoice, errorQChoice,  pIsNumValid);
+				}
+			}
+
+			choices[j] = createNewChoice(tmpNumber, false);
+		}
+		insertDataToEndListQ(&listQ, choices, 6, 0);
+	}
 }

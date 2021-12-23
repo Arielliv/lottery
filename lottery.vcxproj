@@ -140,21 +140,25 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="choice.c" />
+    <ClCompile Include="input.c" />
     <ClCompile Include="listQ.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="menu.c" />
     <ClCompile Include="random.c" />
     <ClCompile Include="user.c" />
     <ClCompile Include="utils.c" />
+    <ClCompile Include="validations.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="choice.h" />
     <ClInclude Include="file.h" />
+    <ClInclude Include="input.h" />
     <ClInclude Include="listQ.h" />
     <ClInclude Include="menu.h" />
     <ClInclude Include="random.h" />
     <ClInclude Include="user.h" />
     <ClInclude Include="utils.h" />
+    <ClInclude Include="validations.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
