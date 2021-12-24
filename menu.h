@@ -3,6 +3,7 @@
 #define manual 1
 #define auto 0
 #define ExitSign 3
+#define SizeOfQueue 6
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -18,21 +19,17 @@
 
 void showMenu();
 
-int getUserMenuSelection();
-
-void createNewLottery();
-
-ListQ* createListOfUserQs(bool isAutoLottery, int numOfUserQs);
+ListQ createListOfUserQs(bool isAutoLottery, int numOfUserQs);
 
 ListUsers* setupUsersList(int numberOfParticipants);
 
-void printUserLotteryOptions();
+void fillUserQs(bool isAutoLottery, int numOfUserQs, ListQ* listQ, Choice* choices);
+
+void setUpUserScore(ListUsers* users);
+
+void raffleWinningQueue(Choice** winningQueue);
 
 void printLotteryResults();
 
-Choice* createWinningRandomQ();
-
 void printSortedListOfQs(ListQ ListOfQs);
 
-
-void fillUserQs(bool isAutoLottery, int numOfUserQs, ListQ* listQ, Choice** choices);

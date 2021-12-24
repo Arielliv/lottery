@@ -5,7 +5,7 @@
 
 typedef struct user {
 	char* name;
-	ListQ* list;
+	ListQ* listQ;
 	double avrageOfHits;
 	bool isAuto;
 	int numOfQs;
@@ -19,7 +19,7 @@ typedef struct listUsers {
 
 void makeEmptyUsersList(ListUsers* lst);
 
-void insertDataToEndListUsers(ListUsers* lst, char* name, ListQ* list, int numOfQs,  double avarageOfHits, bool isAuto);
+void insertDataToEndListUsers(ListUsers* usersList, char* name, ListQ* listQ, int numOfQs, double avarageOfHits, bool isAuto);
 
 User* createNewUser(char* name, ListQ* list, double avarageOfHits, int numOfQs, bool isAuto, User* next);
 
@@ -27,7 +27,7 @@ bool isEmptyListUsers(ListUsers* lst);
 
 void insertNodeToEndListUsers(ListUsers* lst, User* newTail);
 
-int getUserTotalNumOfHits(User* user);
+void setUserTotalNumOfHits(User* user, Choice* winningQueue);
 
 void updateUserNumOfQs(int numOfQs, User* user);
 

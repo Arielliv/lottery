@@ -20,6 +20,7 @@ char* getDynamicStringInput() {
 	char c;
 	str = (char*)malloc(sizeof(char) * phySize);
 	checkMemoryAllocation(str);
+
 	c = getchar();
 	c = getchar();
 	while (c != '\n') {

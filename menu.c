@@ -1,8 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "menu.h"
 
-
-
 void showMenu() {
 	int userChoice = 0, numberOfParticipants;
 	ListUsers* users;
@@ -22,6 +20,7 @@ void showMenu() {
 		if (userChoice == 1) {
 			numberOfParticipants = getNumberInput(msgParticipants, errorParticipants, isBiggerThenZeroNum);
 			users = setupUsersList(numberOfParticipants);
+			setUpUserScore(users, numberOfParticipants);
 		}
 		else if (userChoice == 2) {
 		}
@@ -38,7 +37,7 @@ void showMenu() {
 ListUsers* setupUsersList(int numberOfParticipants) {
 	int i, numOfUserQs;
 	ListUsers users;
-	ListQ* userListQs;
+	ListQ userListQs;
 	char* name;
 	bool isAutoLottery;
 	PIsNumValid* pIsNumValid = isBiggerThenZeroNum;
@@ -51,53 +50,86 @@ ListUsers* setupUsersList(int numberOfParticipants) {
 		isAutoLottery = getIsAutoLottery();
 		numOfUserQs = getNumberInput(msgQ, errorQ, pIsNumValid);
 		userListQs = createListOfUserQs(isAutoLottery, numOfUserQs);
-		insertDataToEndListUsers(&users, name,userListQs, numOfUserQs, 0, isAutoLottery);
+		insertDataToEndListUsers(&users, name, &userListQs, numOfUserQs, 0, isAutoLottery);
 	}
 	return &users;
 }
 
-ListQ* createListOfUserQs(bool isAutoLottery, int numOfUserQs) {
+ListQ createListOfUserQs(bool isAutoLottery, int numOfUserQs) {
 	int i, j, tmpNumber;
-	Choice** choices = (Choice**)malloc(sizeof(Choice*) * 6);
+	Choice* choices = (Choice*)malloc(sizeof(Choice) * SizeOfQueue);
 	checkMemoryAllocation(choices);
+
 	ListQ listQ;
 	makeEmptyListQ(&listQ);
-	
+
 	fillUserQs(isAutoLottery, numOfUserQs, &listQ, choices);
 
-	return &listQ;
+	return listQ;
 }
 
-void fillUserQs(bool isAutoLottery, int numOfUserQs, ListQ* listQ, Choice** choices) {
+void fillUserQs(bool isAutoLottery, int numOfUserQs, ListQ* listQ, Choice* choices) {
 	int i, j, tmpNumber;
 	PIsNumValid* pIsNumValid = isValidChoiceNum;
 
 
 	for (i = 0; i < numOfUserQs; i++) {
-		choices = (Choice**)calloc(6, sizeof(Choice*) * 6);
+		choices = (Choice*)calloc(SizeOfQueue, sizeof(Choice) * SizeOfQueue);
 		checkMemoryAllocation(choices);
-		for (j = 0; j < 6; j++) {
-			printf("\n index %d \n", j);
-			printChoices(choices, j);
+		for (j = 0; j < SizeOfQueue; j++) {
 			if (isAutoLottery == true) {
 				tmpNumber = getRandomNum(1, 15);
 			}
 			else {
 				tmpNumber = getNumberInput(msgQChoice, errorQChoice, pIsNumValid);
 			}
-			
+
 
 			while (getChoiceByDataFromArray(choices, j, tmpNumber) != NULL) {
 				if (isAutoLottery == true) {
 					tmpNumber = getRandomNum(1, 15);
 				}
 				else {
-					tmpNumber = getNumberInput(msgQChoice, errorQChoice,  pIsNumValid);
+					tmpNumber = getNumberInput(msgQChoice, errorQChoice, pIsNumValid);
 				}
 			}
 
 			choices[j] = createNewChoice(tmpNumber, false);
 		}
-		insertDataToEndListQ(&listQ, choices, 6, 0);
+		printf("\n user queue nuber %d \n", i);
+		printChoices(choices, SizeOfQueue);
+		insertDataToEndListQ(listQ, choices, SizeOfQueue, 0);
 	}
 }
+void setUpUserScore(ListUsers* users) {
+	User* curr = users->head;
+	Choice* winningQueue = NULL;
+	raffleWinningQueue(&winningQueue);
+
+	while (curr != NULL) {
+		setUserTotalNumOfHits(curr, winningQueue);
+	}
+	
+}
+
+void raffleWinningQueue(Choice** winningQueue) {
+	int i, tmpNumber;
+	Choice* choices = (Choice*)malloc(sizeof(Choice) * SizeOfQueue);
+	checkMemoryAllocation(choices);
+
+	for (i = 0; i < SizeOfQueue; i++) {
+		tmpNumber = getRandomNum(1, 15);
+		while (getChoiceByDataFromArray(choices, i, tmpNumber) != NULL) {
+			tmpNumber = getRandomNum(1, 15);
+		}
+		choices[i] = createNewChoice(tmpNumber, false);
+	}
+	printf("\n winning queue %d \n", i);
+	printChoices(choices, i);
+	*winningQueue = choices;
+}
+
+
+//void printLotteryResults();
+
+//void printSortedListOfQs(ListQ ListOfQs);

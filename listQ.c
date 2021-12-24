@@ -5,13 +5,14 @@ void makeEmptyListQ(ListQ* lst)
 	lst->head = lst->tail = NULL;
 }
 
-void insertDataToEndListQ(ListQ* lst, Choice** choices, int length, int totalCountOfHits)
+void insertDataToEndListQ(ListQ* lst, Choice* choices, int length, int totalCountOfHits)
 {
 	LNodeQ* newTail;
 
 	newTail = createNewLNodeQ(choices, length, totalCountOfHits, NULL);
 	insertNodeToEndListNode(lst, newTail);
 }
+
 void insertNodeToEndListNode(ListQ* lst, LNodeQ* newTail)
 {
 	if (isEmptyListQ(lst))
@@ -22,18 +23,14 @@ void insertNodeToEndListNode(ListQ* lst, LNodeQ* newTail)
 	}
 }
 
-LNodeQ* createNewLNodeQ(Choice** choices, int length, int totalCountOfHits, LNodeQ* next)
+LNodeQ* createNewLNodeQ(Choice* choices, int length, int totalCountOfHits, LNodeQ* next)
 {
 	LNodeQ* res;
 
 	res = (LNodeQ*)malloc(sizeof(LNodeQ));
 	checkMemoryAllocation(res);
 	res->totalCountOfHits = totalCountOfHits;
-	res->choices = (Choice**)malloc(sizeof(Choice*)*length);
-	checkMemoryAllocation(res->choices);
-	for (int i = 0; i < length; i++) {
-		res->choices[i] = choices[i];
-	}
+	res->choices = choices;
 	res->next = next;
 	return res;
 }
@@ -69,4 +66,8 @@ int getNumOfLNodeQByNumOfHits(ListQ* lst, int numOfHits)
 int getLNodeQNumOfHits(LNodeQ* lNodeQ)
 {
 	return lNodeQ->totalCountOfHits;
+}
+
+void updateLNodetotalOfHits(LNodeQ* lNodeQ, int totalNum) {
+	lNodeQ->totalCountOfHits = totalNum;
 }

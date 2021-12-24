@@ -5,7 +5,7 @@
 
 typedef struct lNodeQ {
 	int totalCountOfHits;
-	Choice** choices;
+	Choice* choices;
 	struct lNodeQ* next;
 } LNodeQ;
 
@@ -16,11 +16,11 @@ typedef struct listQ {
 
 void makeEmptyListQ(ListQ* lst);
 
-void insertDataToEndListQ(ListQ* lst, Choice** choices, int length, int totalCountOfHits);
+void insertDataToEndListQ(ListQ* lst, Choice* choices, int length, int totalCountOfHits);
 
 void insertNodeToEndListNode(ListQ* lst, LNodeQ* newTail);
 
-LNodeQ* createNewLNodeQ(Choice** choices,int length, int totalCountOfHits, LNodeQ* next);
+LNodeQ* createNewLNodeQ(Choice* choices,int length, int totalCountOfHits, LNodeQ* next);
 
 bool isEmptyListQ(ListQ* lst);
 
@@ -29,3 +29,4 @@ void insertNodeToEndListQ(ListQ* lst, LNodeQ* newTail);
 int getNumOfLNodeQByNumOfHits(ListQ* lst, int numOfHits);
 
 int getLNodeQNumOfHits(LNodeQ* lNodeQ);
+void updateLNodetotalOfHits(LNodeQ* lNodeQ, int totalNum);
