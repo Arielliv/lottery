@@ -7,5 +7,3 @@
 void checkFile(FILE* fp);
 
 void checkMemoryAllocation(void* ptr);
-
-char* getDynamicStringInput();

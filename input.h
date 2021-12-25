@@ -1,5 +1,7 @@
 #pragma once
 #include <stdbool.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 #define msgQChoice  "Please enter number for your queue :\n"
 #define errorQChoice "wrong number - try again between 1-15 and unique .\n"
@@ -13,3 +15,4 @@ typedef bool (*PIsNumValid)(int);
 int getNumberInput(char* msg, char* error, PIsNumValid cb);
 bool getIsAutoLottery();
 char* getParticipantName();
+char* getDynamicStringInput();

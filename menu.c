@@ -20,7 +20,8 @@ void showMenu() {
 		if (userChoice == 1) {
 			numberOfParticipants = getNumberInput(msgParticipants, errorParticipants, isBiggerThenZeroNum);
 			users = setupUsersList(numberOfParticipants);
-			setUpUserScore(users, numberOfParticipants);
+			Choice* winningQ =  setUpUserScore(users);
+			printLotteryResults(users, winningQ);
 		}
 		else if (userChoice == 2) {
 		}
@@ -37,7 +38,7 @@ void showMenu() {
 ListUsers* setupUsersList(int numberOfParticipants) {
 	int i, numOfUserQs;
 	ListUsers users;
-	ListQ userListQs;
+	ListQ* userListQ;
 	char* name;
 	bool isAutoLottery;
 	PIsNumValid* pIsNumValid = isBiggerThenZeroNum;
@@ -49,87 +50,64 @@ ListUsers* setupUsersList(int numberOfParticipants) {
 		name = getParticipantName();
 		isAutoLottery = getIsAutoLottery();
 		numOfUserQs = getNumberInput(msgQ, errorQ, pIsNumValid);
-		userListQs = createListOfUserQs(isAutoLottery, numOfUserQs);
-		insertDataToEndListUsers(&users, name, &userListQs, numOfUserQs, 0, isAutoLottery);
+		userListQ = createListOfUserQs(isAutoLottery, numOfUserQs);
+		insertDataToEndListUsers(&users, name, userListQ, numOfUserQs, 0, isAutoLottery);
+		/*printf("\n asdas");
+		printUserListQ(&users);
+		printf("\n asdas");*/
 	}
+	
+	
 	return &users;
 }
 
-ListQ createListOfUserQs(bool isAutoLottery, int numOfUserQs) {
-	int i, j, tmpNumber;
-	Choice* choices = (Choice*)malloc(sizeof(Choice) * SizeOfQueue);
-	checkMemoryAllocation(choices);
+ListQ* createListOfUserQs(bool isAutoLottery, int numOfUserQs) {
+	ListQ *listQ = (ListQ*)malloc(sizeof(ListQ));
+	makeEmptyListQ(listQ);
 
-	ListQ listQ;
-	makeEmptyListQ(&listQ);
-
-	fillUserQs(isAutoLottery, numOfUserQs, &listQ, choices);
+	fillUserQs(isAutoLottery, numOfUserQs, listQ);
 
 	return listQ;
 }
 
-void fillUserQs(bool isAutoLottery, int numOfUserQs, ListQ* listQ, Choice* choices) {
-	int i, j, tmpNumber;
-	PIsNumValid* pIsNumValid = isValidChoiceNum;
-
-
+void fillUserQs(bool isAutoLottery, int numOfUserQs, ListQ* listQ) {
+	int i;
+	Choice* queue = NULL;
 	for (i = 0; i < numOfUserQs; i++) {
-		choices = (Choice*)calloc(SizeOfQueue, sizeof(Choice) * SizeOfQueue);
-		checkMemoryAllocation(choices);
-		for (j = 0; j < SizeOfQueue; j++) {
-			if (isAutoLottery == true) {
-				tmpNumber = getRandomNum(1, 15);
-			}
-			else {
-				tmpNumber = getNumberInput(msgQChoice, errorQChoice, pIsNumValid);
-			}
-
-
-			while (getChoiceByDataFromArray(choices, j, tmpNumber) != NULL) {
-				if (isAutoLottery == true) {
-					tmpNumber = getRandomNum(1, 15);
-				}
-				else {
-					tmpNumber = getNumberInput(msgQChoice, errorQChoice, pIsNumValid);
-				}
-			}
-
-			choices[j] = createNewChoice(tmpNumber, false);
+		if (isAutoLottery == true) {
+			autoFillQ(&queue);
 		}
-		printf("\n user queue nuber %d \n", i);
-		printChoices(choices, SizeOfQueue);
-		insertDataToEndListQ(listQ, choices, SizeOfQueue, 0);
+		else {
+			manuallyFillQ(&queue);
+		}
+		insertDataToEndListQ(listQ, queue, 0);
 	}
 }
-void setUpUserScore(ListUsers* users) {
+Choice* setUpUserScore(ListUsers* users) {
 	User* curr = users->head;
 	Choice* winningQueue = NULL;
 	raffleWinningQueue(&winningQueue);
 
 	while (curr != NULL) {
 		setUserTotalNumOfHits(curr, winningQueue);
+		updateUserAvarageOfHits(curr);
+		curr = curr->next;
 	}
-	
+
+	return winningQueue;
 }
 
 void raffleWinningQueue(Choice** winningQueue) {
-	int i, tmpNumber;
-	Choice* choices = (Choice*)malloc(sizeof(Choice) * SizeOfQueue);
-	checkMemoryAllocation(choices);
-
-	for (i = 0; i < SizeOfQueue; i++) {
-		tmpNumber = getRandomNum(1, 15);
-		while (getChoiceByDataFromArray(choices, i, tmpNumber) != NULL) {
-			tmpNumber = getRandomNum(1, 15);
-		}
-		choices[i] = createNewChoice(tmpNumber, false);
-	}
-	printf("\n winning queue %d \n", i);
-	printChoices(choices, i);
-	*winningQueue = choices;
+	autoFillQ(winningQueue);
 }
 
 
-//void printLotteryResults();
+void printLotteryResults(ListUsers* users,Choice * winningQ) {
+	printf("Here is the winning queue : \n");
+	printChoicesData(winningQ, 6);
+	
+	sortUsersListQs(users);
+	printUserListQ(users);
 
-//void printSortedListOfQs(ListQ ListOfQs);
+	printHighestUser(users);
+}

@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include "listQ.h"
 
 void makeEmptyListQ(ListQ* lst)
@@ -5,11 +6,11 @@ void makeEmptyListQ(ListQ* lst)
 	lst->head = lst->tail = NULL;
 }
 
-void insertDataToEndListQ(ListQ* lst, Choice* choices, int length, int totalCountOfHits)
+void insertDataToEndListQ(ListQ* lst, Choice* choices, int totalCountOfHits)
 {
 	LNodeQ* newTail;
 
-	newTail = createNewLNodeQ(choices, length, totalCountOfHits, NULL);
+	newTail = createNewLNodeQ(choices, totalCountOfHits, NULL);
 	insertNodeToEndListNode(lst, newTail);
 }
 
@@ -23,7 +24,7 @@ void insertNodeToEndListNode(ListQ* lst, LNodeQ* newTail)
 	}
 }
 
-LNodeQ* createNewLNodeQ(Choice* choices, int length, int totalCountOfHits, LNodeQ* next)
+LNodeQ* createNewLNodeQ(Choice* choices, int totalCountOfHits, LNodeQ* next)
 {
 	LNodeQ* res;
 
@@ -40,10 +41,17 @@ bool isEmptyListQ(ListQ* lst)
 	return (lst->head == NULL);
 }
 
-//LNodeQ* getLNodeQByChoiceData(ListQ* lst, int choiceData)
-//{
-//
-//}
+void printListQ(ListQ* lst) {
+	if (lst == NULL) {
+		return;
+	} 
+	LNodeQ* currLNodeQ = lst->head;
+	while (currLNodeQ != NULL) {
+		printf("Total number of hits : %d \n", currLNodeQ->totalCountOfHits);
+		printChoicesData(currLNodeQ->choices,6);
+		currLNodeQ = currLNodeQ->next;
+	}
+}
 
 
 int getNumOfLNodeQByNumOfHits(ListQ* lst, int numOfHits)
@@ -70,4 +78,45 @@ int getLNodeQNumOfHits(LNodeQ* lNodeQ)
 
 void updateLNodetotalOfHits(LNodeQ* lNodeQ, int totalNum) {
 	lNodeQ->totalCountOfHits = totalNum;
+}
+
+void sortListQ(ListQ* lst) {
+	bubbleSort(lst);
+}
+
+void bubbleSort(ListQ* lst){
+	bool swapped;
+	LNodeQ* curr;
+	LNodeQ* next = NULL;
+
+	if (lst == NULL)
+		return;
+
+	do
+	{
+		swapped = false;
+		curr = lst->head;
+
+		while (curr->next != next)
+		{
+			if (curr->totalCountOfHits < curr->next->totalCountOfHits)
+			{
+				swap(curr, curr->next);
+				swapped = true;
+			}
+			curr = curr->next;
+		}
+		next = curr;
+	} while (swapped);
+}
+
+/* function to swap data of two LNodeQ a and b*/
+void swap(LNodeQ* a, LNodeQ* b)
+{
+	Choice* tmpChoices = a->choices;
+	int tmpTotalCountOfHits = a->totalCountOfHits;
+	a->choices = b->choices;
+	a->totalCountOfHits = b->totalCountOfHits;
+	b->choices = tmpChoices;
+	b->totalCountOfHits = tmpTotalCountOfHits;
 }

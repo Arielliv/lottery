@@ -39,6 +39,17 @@ void printChoices(Choice* choices, int length) {
 	}
 }
 
+void printChoiceData(Choice choice) {
+	printf(" %d ", choice.data);
+}
+
+void printChoicesData(Choice* choices, int length) {
+	for (int i = 0; i < length; i++) {
+		printChoiceData(choices[i]);
+	}
+	printf("\n");
+}
+
 bool isChoiceInArray(Choice* choiceArray, int size, Choice choice){
 	int i;
 	bool isExist = false;
@@ -48,4 +59,35 @@ bool isChoiceInArray(Choice* choiceArray, int size, Choice choice){
 		}
 	}
 	return isExist;
+}
+
+void manuallyFillQ(Choice** queue) {
+	int i, j, tmpNumber;
+	PIsNumValid* pIsNumValid = isValidChoiceNum;
+	Choice* choices = (Choice*)malloc(sizeof(Choice) * SizeOfQueue);
+	checkMemoryAllocation(choices);
+
+	for (i = 0; i < SizeOfQueue; i++) {
+		tmpNumber = getRandomNum(1, 15);
+		while (getChoiceByDataFromArray(choices, i, tmpNumber) != NULL) {
+			tmpNumber = getNumberInput(msgQChoice, errorQChoice, pIsNumValid);
+		}
+		choices[i] = createNewChoice(tmpNumber, false);
+	}
+	*queue = choices;
+}
+
+void autoFillQ(Choice** queue) {
+	int i, tmpNumber;
+	Choice* choices = (Choice*)malloc(sizeof(Choice) * SizeOfQueue);
+	checkMemoryAllocation(choices);
+
+	for (i = 0; i < SizeOfQueue; i++) {
+		tmpNumber = getRandomNum(1, 15);
+		while (getChoiceByDataFromArray(choices, i, tmpNumber) != NULL) {
+			tmpNumber = getRandomNum(1, 15);
+		}
+		choices[i] = createNewChoice(tmpNumber, false);
+	}
+	*queue = choices;
 }
