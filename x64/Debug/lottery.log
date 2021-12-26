@@ -1,9 +1,11 @@
-﻿  user.c
-C:\Users\ariel7342\Projects\lottery\user.c(54,6): warning C4101: 'i': unreferenced local variable
-C:\Users\ariel7342\Projects\lottery\user.c(131,26): warning C4028: formal parameter 1 different from declaration
-C:\Users\ariel7342\Projects\lottery\user.c(132,1): warning C4029: declared formal parameter list different from definition
-C:\Users\ariel7342\Projects\lottery\user.c(150,28): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\ariel7342\Projects\lottery\user.c(177,11): warning C4098: 'updateUserAvarageOfHits': 'void' function returning a value
-C:\Users\ariel7342\Projects\lottery\user.c(202,9): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'int *'
-C:\Users\ariel7342\Projects\lottery\user.c(202,9): warning C4313: 'printf': '%d' in format string conflicts with argument 1 of type 'int *'
+﻿  file.c
+  menu.c
+C:\Users\ariel7342\Projects\lottery\menu.c(7,1): warning C4047: 'initializing': 'PIsNumValid *' differs in levels of indirection from 'bool (__cdecl *)(int)'
+C:\Users\ariel7342\Projects\lottery\menu.c(52,57): warning C4047: 'function': 'PIsNumValid' differs in levels of indirection from 'PIsNumValid *'
+C:\Users\ariel7342\Projects\lottery\menu.c(52,46): warning C4024: 'getNumberInput': different types for formal and actual parameter 3
+C:\Users\ariel7342\Projects\lottery\menu.c(44,1): warning C4047: 'initializing': 'PIsNumValid *' differs in levels of indirection from 'bool (__cdecl *)(int)'
+C:\Users\ariel7342\Projects\lottery\menu.c(112,18): warning C4013: 'printHighestUser' undefined; assuming extern returning int
+  Generating Code...
+C:\Users\ariel7342\Projects\lottery\menu.c(61): warning C4172: returning address of local variable or temporary: users
+C:\Users\ariel7342\Projects\lottery\file.c(95): warning C4172: returning address of local variable or temporary: res
   lottery.vcxproj -> C:\Users\ariel7342\Projects\lottery\x64\Debug\lottery.exe

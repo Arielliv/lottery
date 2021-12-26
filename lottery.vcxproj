@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="choice.c" />
+    <ClCompile Include="file.c" />
     <ClCompile Include="input.c" />
     <ClCompile Include="listQ.c" />
     <ClCompile Include="main.c" />
