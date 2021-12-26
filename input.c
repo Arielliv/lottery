@@ -4,10 +4,10 @@
 int getNumberInput(char* msg, char* error, PIsNumValid cb) {
 	int userChoice;
 	bool isNumberValid = false;
-	while (isNumberValid == false) {
-		printf("%s", msg);
 
-		scanf("%d", &userChoice);
+	while (isNumberValid == false) {
+		printf(msg);
+		scanf(" %d", &userChoice);
 		if (cb(userChoice) == false) {
 			printf("%s", error);
 		}
@@ -18,22 +18,20 @@ int getNumberInput(char* msg, char* error, PIsNumValid cb) {
 	return userChoice;
 }
 
-bool getIsAutoLottery() {
+bool getBoolInput(char* msg, char* error, PIsNumValid cb) {
 	int userChoice;
 	bool isNumberValid = false;
 	while (isNumberValid == false) {
-		printf("Please choose one of the following options and enter it's number :\n"
-			"1- Manual lottory\n"
-			"\n"
-			"2- Auto lottery\n");
-		scanf("%d", &userChoice);
-		if (userChoice < 1 && userChoice >2) {
-			printf("wrong input - try again.\n");
+		printf(msg);
+		scanf(" %d", &userChoice);
+		if (cb(userChoice) == false){
+			printf(error);
 		}
 		else {
 			isNumberValid = true;
 		}
 	}
+
 	if (userChoice == 1) {
 		return false;
 	}

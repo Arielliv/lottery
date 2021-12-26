@@ -199,6 +199,5 @@ int getCountOfParticipants(ListUsers* lst)
 		curr = curr->next;
 	}
 
-	printf("** The number of participants if: %d", &count); // for checks only
 	return count;
 }

@@ -3,25 +3,22 @@
 
 void showMenu() {
 	int userChoice = 0, numberOfParticipants;
+	bool shouldContinue = false;
 	ListUsers* users;
 	PIsNumValid* pIsNumValid = isBiggerThenZeroNum;
-	printf("welcome to out grand lottery game !!!\n");
+	printf(welcomMsg);
 	while (userChoice != ExitSign) {
-		printf("\n"
-			"Please choose one of the following options and enter it's number:\n"
-			"\n"
-			"1 - choose number of participants in the lottery\n"
-			"\n"
-			"2 - show last lottery results\n"
-			"\n"
-			"3 - exit\n"
-		);
+		printf(userChoiceMenuMsg);
 		scanf("%d", &userChoice);
 		if (userChoice == 1) {
 			numberOfParticipants = getNumberInput(msgParticipants, errorParticipants, isBiggerThenZeroNum);
 			users = setupUsersList(numberOfParticipants);
 			Choice* winningQ =  setUpUserScore(users);
 			printLotteryResults(users, winningQ);
+			shouldContinue = getConfirmationTocontinue();
+			if(shouldContinue == true){
+				createBinaryResultsFile(users);
+			}
 		}
 		else if (userChoice == 2) {
 		}
@@ -29,36 +26,41 @@ void showMenu() {
 			return;
 		}
 		else {
-			printf("wrong input - try again.\n");
+			printf(userChoiceMenuError);
 		}
 	}
 
 }
 
+bool getConfirmationTocontinue() {
+	PIsNumValid* pIsBoolNumValid = isValidBoolNum;
+	bool shouldContinue = getBoolInput(continueGameMsg, continueGameError, pIsBoolNumValid);
+	return shouldContinue;
+}
+
 ListUsers* setupUsersList(int numberOfParticipants) {
 	int i, numOfUserQs;
-	ListUsers users;
+	ListUsers* users;
 	ListQ* userListQ;
 	char* name;
 	bool isAutoLottery;
 	PIsNumValid* pIsNumValid = isBiggerThenZeroNum;
+	PIsNumValid* pIsBoolNumValid = isValidBoolNum;
 
-	makeEmptyUsersList(&users);
+	users = (ListUsers*)malloc(sizeof(ListUsers));
+	makeEmptyUsersList(users);
 
 	for (i = 0; i < numberOfParticipants; i++)
 	{
 		name = getParticipantName();
-		isAutoLottery = getIsAutoLottery();
+		isAutoLottery = getBoolInput(autoLottoryMsg, autoLottoryError, pIsBoolNumValid);
 		numOfUserQs = getNumberInput(msgQ, errorQ, pIsNumValid);
 		userListQ = createListOfUserQs(isAutoLottery, numOfUserQs);
-		insertDataToEndListUsers(&users, name, userListQ, numOfUserQs, 0, isAutoLottery);
-		/*printf("\n asdas");
-		printUserListQ(&users);
-		printf("\n asdas");*/
+		insertDataToEndListUsers(users, name, userListQ, numOfUserQs, 0, isAutoLottery);
 	}
 	
 	
-	return &users;
+	return users;
 }
 
 ListQ* createListOfUserQs(bool isAutoLottery, int numOfUserQs) {

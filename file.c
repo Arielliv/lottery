@@ -7,7 +7,7 @@ void createBinaryResultsFile(ListUsers* users)
 	int i = 0;
 	User* currUser;
 	FILE* fpResults;
-	fpResults = fopen("file.bin", "wb");
+	fpResults = fopen("lottery.bin", "wb");
 	checkFile(fpResults);
 
 	writeCountOfParticipants(fpResults, users);     // Writing the count of users 
@@ -72,6 +72,7 @@ void writeCompressedQueuesDataToFile(FILE* fpResults, User* user)
 	{
 		compressedData = compressDataOfSingleQueue(fpResults, currQ->choices);
 		fwrite(compressedData, sizeof(BYTE), 3, fpResults);
+		currQ = currQ->next;
 	}
 }
 
