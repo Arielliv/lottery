@@ -1,3 +1,16 @@
-﻿  file.c
-C:\Users\ariel7342\Projects\lottery\file.c(96): warning C4172: returning address of local variable or temporary: res
+﻿  main.c
+  menu.c
+C:\Users\ariel7342\Projects\lottery\menu.c(22,44): warning C4133: 'function': incompatible types - from 'Choice *' to 'ListQ *'
+C:\Users\ariel7342\Projects\lottery\menu.c(9,1): warning C4047: 'initializing': 'PIsNumValid *' differs in levels of indirection from 'bool (__cdecl *)(int)'
+C:\Users\ariel7342\Projects\lottery\menu.c(45,88): warning C4047: 'function': 'PIsNumValid' differs in levels of indirection from 'PIsNumValid *'
+C:\Users\ariel7342\Projects\lottery\menu.c(45,73): warning C4024: 'getBoolInput': different types for formal and actual parameter 3
+C:\Users\ariel7342\Projects\lottery\menu.c(44,1): warning C4047: 'initializing': 'PIsNumValid *' differs in levels of indirection from 'bool (__cdecl *)(int)'
+C:\Users\ariel7342\Projects\lottery\menu.c(64,81): warning C4047: 'function': 'PIsNumValid' differs in levels of indirection from 'PIsNumValid *'
+C:\Users\ariel7342\Projects\lottery\menu.c(64,66): warning C4024: 'getBoolInput': different types for formal and actual parameter 3
+C:\Users\ariel7342\Projects\lottery\menu.c(65,57): warning C4047: 'function': 'PIsNumValid' differs in levels of indirection from 'PIsNumValid *'
+C:\Users\ariel7342\Projects\lottery\menu.c(65,46): warning C4024: 'getNumberInput': different types for formal and actual parameter 3
+C:\Users\ariel7342\Projects\lottery\menu.c(55,1): warning C4047: 'initializing': 'PIsNumValid *' differs in levels of indirection from 'bool (__cdecl *)(int)'
+C:\Users\ariel7342\Projects\lottery\menu.c(56,1): warning C4047: 'initializing': 'PIsNumValid *' differs in levels of indirection from 'bool (__cdecl *)(int)'
+C:\Users\ariel7342\Projects\lottery\menu.c(122,18): warning C4013: 'printHighestUser' undefined; assuming extern returning int
+  Generating Code...
   lottery.vcxproj -> C:\Users\ariel7342\Projects\lottery\x64\Debug\lottery.exe

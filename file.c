@@ -2,8 +2,9 @@
 
 #include "file.h"
 
-void createBinaryResultsFile(ListUsers* users)
+void createBinaryResultsFile(ListUsers* users, ListQ* winingQ)
 {
+	BYTE* compressedData;
 	int i = 0;
 	User* currUser;
 	FILE* fpResults;
@@ -18,6 +19,8 @@ void createBinaryResultsFile(ListUsers* users)
 		writePerUserToFile(fpResults, currUser);
 		currUser = currUser->next;
 	}
+	compressedData = compressDataOfSingleQueue(fpResults, winingQ);
+	fwrite(compressedData, sizeof(BYTE), 3, fpResults);
 	fclose(fpResults);
 }
 
@@ -111,82 +114,143 @@ int getUserLettersCount(User* user)
 
 //------------------------------------------- Under Works ----------------------------------
 
-//ListUsers* createUsersListFromFile()
-//{
-//	ListUsers* lst;
-//
-//	makeEmptyUsersList(lst);
-//
-//	return lst;
-//}
+void readFile(ListUsers* users, Choice* winningQ) {
+	FILE* fpResults = fopen("lottery.bin", "rb");
+	checkFile(fpResults);
+	users = readUsersListFromFile(fpResults);
+	winningQ = readWinningQFromFile(fpResults);
+	fclose(fpResults);
+}
 
-//void createUserFromFile(FILE * fpResults, User* newUser)
-//{
-//	int numOfQs = 0, numOfUsers = 0, i = 0;
-//	User* newUser;
-//	char* name;
-//
-//	for(i = 0; i < numOfUsers; i++)
-//	{
-//		name = readNameOfUserFromFile(fpResults);
-//		newUser = createNewUser(name, listQ, 0, numOfQs, false, NULL);
-//	}
-//}
+Choice* readWinningQFromFile(FILE* fpResults) {
+	int i;
+	int* uncompressSingleQueue;
+	Choice* choices = (Choice*)malloc(sizeof(Choice) * 6);
 
-//int readNumOfUserFromFile(FILE* fpResults)
-//{
-//	int numOfUsers = 0;
-//	fread(&numOfUsers, sizeof(int), 1, fpResults);
-//	return numOfUsers;
-//}
-//
-//int readLettersCountToFile(FILE* fpResults)
-//{
-//	int lettersCount = 0;
-//	fread(&lettersCount, sizeof(int), 1, fpResults);
-//	return lettersCount;
-//}
-//
-//char* readNameOfUserFromFile(FILE* fpResults)
-//{
-//	char* name;
-//	int lettersCount = 0;
-//
-//	lettersCount = readLettersCountToFile(fpResults);
-//	fread(&name, sizeof(char), lettersCount, fpResults);
-//	return name;
-//}
-//
-//int* uncompressDataOfSingleQueue(FILE* fpResults)
-//{
-//	int i, choice1 = 0, choice2 = 0;
-//	BYTE mask1 = 0xf0;      // 11110000
-//	BYTE mask2 = 0x0f;      // 00001111
-//	int res[6];
-//	BYTE tmp;
-//
-//	for (i = 0; i <= 6; i = i+ 2) // unCompress 3 bytes
-//	{
-//		fread(&tmp, sizeof(BYTE), 1, fpResults);
-//
-//		choice1 = (tmp + mask1) >> 4;
-//		choice2 = (tmp + mask2);
-//
-//		res[i] = choice1;
-//		res[i + 1] = choice2;
-//	}
-//	return res;
-//}
-//
-//void createChoiceFromFile(int* queue)
-//{
-//	int i = 0;
-//
-//	for (i = 0; i <= 6; i++)
-//	{
-//		Choice* choice;
-//		choice->data = queue[i];
-//		choice->isHit = 0;
-//	}
-//
-//}
+	uncompressSingleQueue = uncompressDataOfSingleQueue(fpResults);
+	for (i = 0; i < 6; i++) {
+		Choice tmpChoice;
+		tmpChoice.data = uncompressSingleQueue[i];
+		tmpChoice.isHit = false;
+		choices[i] = tmpChoice;
+	}
+	return choices;
+}
+
+ListUsers* readUsersListFromFile(FILE* fpResults){
+	ListUsers* users;
+	User* newUser;
+	int numOfUsers = 0, i;
+
+	
+	
+	users = (ListUsers*)malloc(sizeof(ListUsers));
+	makeEmptyUsersList(users);
+	numOfUsers = readNumOfUserFromFile(fpResults);
+	for ( i= 0; i < numOfUsers; i++){
+		newUser = createUserFromFile(fpResults);
+		insertNodeToEndListUsers(users, newUser);
+	}
+	return users;
+}
+
+User* createUserFromFile(FILE * fpResults)
+{
+	int numOfQ = 0, i = 0;
+	User* newUser;
+	ListQ* listQ;
+	char* name;
+	name = readNameOfUserFromFile(fpResults);
+	numOfQ = readNumOfListQFromFile(fpResults);
+	listQ = readListQOfUserFromFile(fpResults, numOfQ);
+	newUser = createNewUser(name, listQ, 0, numOfQ, false, NULL);
+
+	return newUser;
+}
+
+int readNumOfListQFromFile(FILE* fpResults) {
+	int numOfListQ = 0;
+	fread(&numOfListQ, sizeof(int), 1, fpResults);
+	return numOfListQ;
+}
+
+ListQ* readListQOfUserFromFile(FILE* fpResults, int numOfQ) {
+	int i = 0;
+	ListQ* listQ;
+	Choice* choices;
+
+	listQ = (ListQ*)malloc(sizeof(ListQ));
+	makeEmptyListQ(listQ);
+
+	for ( i = 0; i < numOfQ; i++)
+	{
+		choices = readChoicesFromFile(fpResults);
+		insertDataToEndListQ(listQ, choices, 0);
+	}
+	return listQ;
+}
+
+Choice* readChoicesFromFile(FILE* fpResults) {
+	int i;
+	int* uncompressSingleQueue;
+	int data;
+	int currentChoice;
+	Choice* choices = (Choice*)malloc(sizeof(Choice) * 6);
+	uncompressSingleQueue = uncompressDataOfSingleQueue(fpResults);
+	for (i = 0; i < 6; i++) {
+		Choice tmpChoice;
+		tmpChoice.data = uncompressSingleQueue[i];
+		tmpChoice.isHit = false;
+		choices[i] = tmpChoice;
+	}
+	return choices;
+}
+
+int readNumOfUserFromFile(FILE* fpResults)
+{
+	int numOfUsers = 0;
+	fread(&numOfUsers, sizeof(int), 1, fpResults);
+	return numOfUsers;
+}
+
+int readLettersCountToFile(FILE* fpResults)
+{
+	int lettersCount = 0;
+	fread(&lettersCount, sizeof(int), 1, fpResults);
+	return lettersCount;
+}
+
+char* readNameOfUserFromFile(FILE* fpResults)
+{
+	char* name;
+	int lettersCount = 0;
+
+	lettersCount = readLettersCountToFile(fpResults);
+	name = (char*)malloc((sizeof(char) * lettersCount) + 1);
+	checkMemoryAllocation(name);
+
+	fread(name, sizeof(char), lettersCount, fpResults);
+	name[lettersCount] = '\0';
+	return name;
+}
+
+int* uncompressDataOfSingleQueue(FILE* fpResults)
+{
+	int i, choice1 = 0, choice2 = 0;
+	BYTE mask1 = 0xf0;      // 11110000
+	BYTE mask2 = 0x0f;      // 00001111
+	int res[6];
+	BYTE tmp;
+
+	for (i = 0; i < 6; i = i+ 2) // unCompress 3 bytes
+	{
+		fread(&tmp, sizeof(BYTE), 1, fpResults);
+
+		choice1 = (tmp + mask1) >> 4;
+		choice2 = (tmp + mask2);
+
+		res[i] = choice1;
+		res[i + 1] = choice2;
+	}
+	return res;
+}

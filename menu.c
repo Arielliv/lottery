@@ -5,7 +5,9 @@ void showMenu() {
 	int userChoice = 0, numberOfParticipants;
 	bool shouldContinue = false;
 	ListUsers* users;
+	Choice* winningQ;
 	PIsNumValid* pIsNumValid = isBiggerThenZeroNum;
+
 	printf(welcomMsg);
 	while (userChoice != ExitSign) {
 		printf(userChoiceMenuMsg);
@@ -13,14 +15,20 @@ void showMenu() {
 		if (userChoice == 1) {
 			numberOfParticipants = getNumberInput(msgParticipants, errorParticipants, isBiggerThenZeroNum);
 			users = setupUsersList(numberOfParticipants);
-			Choice* winningQ =  setUpUserScore(users);
+			winningQ =  setUpUserScore(users);
 			printLotteryResults(users, winningQ);
 			shouldContinue = getConfirmationTocontinue();
 			if(shouldContinue == true){
-				createBinaryResultsFile(users);
+				createBinaryResultsFile(users, winningQ);
 			}
 		}
 		else if (userChoice == 2) {
+			FILE* fpResults = fopen("lottery.bin", "rb");
+			checkFile(fpResults);
+			users = readUsersListFromFile(fpResults);
+			winningQ = readWinningQFromFile(fpResults);
+			fclose(fpResults);
+			printLotteryResults(users, winningQ);
 		}
 		else if (userChoice == 3) {
 			return;
