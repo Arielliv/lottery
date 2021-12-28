@@ -1,4 +1,5 @@
 #pragma once
+
 #include <stdbool.h>
 #include <stdlib.h>
 #include "validations.h"
@@ -13,22 +14,24 @@ typedef struct choice {
 
 Choice createNewChoice(int data, bool isHit);
 
-void updateIsHit(Choice* choice, bool isHit);
+void updateIsHit(Choice *choice, bool isHit);
 
 bool checkIfChoiceWasHit(Choice choice);
 
-Choice* getChoiceByDataFromArray(Choice* choices, int length, int data);
+Choice *getChoiceByDataFromArray(Choice *choices, int length, int data);
 
-void freeChoicesArray(Choice* choices, int length);
+void freeChoicesArray(Choice *choices, int length);
 
-void printChoice(Choice* choice);
+void printChoice(Choice *choice);
 
-void printChoices(Choice* choices, int length);
+void printChoices(Choice *choices, int length);
 
-bool isChoiceInArray(Choice* choiceArray, int size, Choice choice);
+bool isChoiceInArray(Choice *choiceArray, int size, Choice choice);
 
 void printChoiceData(Choice choice);
 
-void printChoicesData(Choice* choices, int length);
-void autoFillQ(Choice** queue);
-void manuallyFillQ(Choice** queue);
+void printChoicesData(Choice *choices, int length);
+
+void autoFillQ(Choice **queue);
+
+void manuallyFillQ(Choice **queue);

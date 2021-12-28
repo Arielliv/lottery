@@ -4,52 +4,54 @@
 #include <stdlib.h>
 
 typedef struct user {
-	char* name;
-	ListQ* listQ;
-	double avrageOfHits;
-	bool isAuto;
-	int numOfQs;
-	struct user* next;
+    char *name;
+    ListQ *listQ;
+    double avrageOfHits;
+    bool isAuto;
+    int numOfQs;
+    struct user *next;
 } User;
 
 typedef struct listUsers {
-	User* head;
-	User* tail;
-}ListUsers;
+    User *head;
+    User *tail;
+} ListUsers;
 
-void makeEmptyUsersList(ListUsers* lst);
+void makeEmptyUsersList(ListUsers *lst);
 
-void insertDataToEndListUsers(ListUsers* usersList, char* name, ListQ* listQ, int numOfQs, double avarageOfHits, bool isAuto);
+void insertDataToEndListUsers(ListUsers *usersList, char *name, ListQ *listQ, int numOfQs, double avarageOfHits,
+                              bool isAuto);
 
-User* createNewUser(char* name, ListQ* listQ, double avarageOfHits, int numOfQs, bool isAuto, User* next);
+User *createNewUser(char *name, ListQ *listQ, double avarageOfHits, int numOfQs, bool isAuto, User *next);
 
-bool isEmptyListUsers(ListUsers* lst);
+bool isEmptyListUsers(ListUsers *lst);
 
-void insertNodeToEndListUsers(ListUsers* lst, User* newTail);
+void insertNodeToEndListUsers(ListUsers *lst, User *newTail);
 
-void setUserTotalNumOfHits(User* user, Choice* winningQueue);
+void setUserTotalNumOfHits(User *user, Choice *winningQueue);
 
-void updateUserNumOfQs(int numOfQs, User* user);
+void updateUserNumOfQs(int numOfQs, User *user);
 
-void updateUserAvarageOfHits(User* user);
+void updateUserAvarageOfHits(User *user);
 
-int getUserNumOfQs(int numOfQs, User* user);
+int getUserNumOfQs(int numOfQs, User *user);
 
-User* getUserWithHighestScore(ListUsers* ListOfUsers);
+User *getUserWithHighestScore(ListUsers *ListOfUsers);
 
-void printUserListQ(ListUsers* listOfUsers);
-void sortUsersListQs(ListUsers* listOfUsers);
+void printUserListQ(ListUsers *listOfUsers);
 
-void updateUserNumOfQs(int numOfQs, User* user);
+void sortUsersListQs(ListUsers *listOfUsers);
 
-int getUserNumOfQs(int numOfQs, User* user);
+void updateUserNumOfQs(int numOfQs, User *user);
 
-void updateUserAvarageOfHits(User* user);
+int getUserNumOfQs(int numOfQs, User *user);
 
-User* getUserWithHighestScore(ListUsers* ListOfUsers);
+void updateUserAvarageOfHits(User *user);
 
-int getUserTotalNumOfHits(User* user);
+User *getUserWithHighestScore(ListUsers *ListOfUsers);
 
-int getCountOfParticipants(ListUsers* lst);
+int getUserTotalNumOfHits(User *user);
+
+int getCountOfParticipants(ListUsers *lst);
 
 

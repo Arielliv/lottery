@@ -4,6 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void checkFile(FILE* fp);
+void checkFile(FILE *fp);
 
-void checkMemoryAllocation(void* ptr);
+void checkMemoryAllocation(void *ptr);

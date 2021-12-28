@@ -1,4 +1,5 @@
 #pragma once
+
 #include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -16,7 +17,10 @@
 
 typedef bool (*PIsNumValid)(int);
 
-int getNumberInput(char* msg, char* error, PIsNumValid cb);
-bool getBoolInput(char* msg, char* error, PIsNumValid cb);
-char* getParticipantName();
-char* getDynamicStringInput();
+int getNumberInput(char *msg, char *error, PIsNumValid cb);
+
+bool getBoolInput(char *msg, char *error, PIsNumValid cb);
+
+char *getParticipantName();
+
+char *getDynamicStringInput();

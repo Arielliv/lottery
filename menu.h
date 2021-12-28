@@ -11,7 +11,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-
 #include "choice.h"
 #include "listQ.h"
 #include "random.h"
@@ -23,16 +22,16 @@
 
 void showMenu();
 
-ListQ* createListOfUserQs(bool isAutoLottery, int numOfUserQs);
+ListQ *createListOfUserQs(bool isAutoLottery, int numOfUserQs);
 
-ListUsers* setupUsersList(int numberOfParticipants);
+ListUsers *setupUsersList(int numberOfParticipants);
 
-void fillUserQs(bool isAutoLottery, int numOfUserQs, ListQ* listQ);
+void fillUserQs(bool isAutoLottery, int numOfUserQs, ListQ *listQ);
 
-Choice* setUpUserScore(ListUsers* users);
+Choice *setUpUserScore(ListUsers *users);
 
-void raffleWinningQueue(Choice** winningQueue);
+void raffleWinningQueue(Choice **winningQueue);
 
-void printLotteryResults(ListUsers* users, Choice* winningQ);
+void printLotteryResults(ListUsers *users, Choice *winningQ);
 
 bool getConfirmationTocontinue();
