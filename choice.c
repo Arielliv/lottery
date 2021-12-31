@@ -28,17 +28,6 @@ Choice *getChoiceByDataFromArray(Choice *choices, int length, int data) {
     return NULL;
 }
 
-void printChoice(Choice choice) {
-    printf("data : %d ", choice.data);
-    printf("isHit : %d \n", choice.isHit);
-}
-
-void printChoices(Choice *choices, int length) {
-    for (int i = 0; i < length; i++) {
-        printChoice(choices[i]);
-    }
-}
-
 void printChoiceData(Choice choice) {
     printf(" %d ", choice.data);
 }
@@ -62,14 +51,15 @@ bool isChoiceInArray(Choice *choiceArray, int size, Choice choice) {
 }
 
 void manuallyFillQ(Choice **queue) {
-    int i, j, tmpNumber;
+    int i, tmpNumber;
     PIsNumValid *pIsNumValid = isValidChoiceNum;
     Choice *choices = (Choice *) malloc(sizeof(Choice) * SizeOfQueue);
     checkMemoryAllocation(choices);
 
     for (i = 0; i < SizeOfQueue; i++) {
-        tmpNumber = getRandomNum(1, 15);
+        tmpNumber = getNumberInput(msgQChoice, errorQChoice, pIsNumValid);
         while (getChoiceByDataFromArray(choices, i, tmpNumber) != NULL) {
+            printf(errorQChoice);
             tmpNumber = getNumberInput(msgQChoice, errorQChoice, pIsNumValid);
         }
         choices[i] = createNewChoice(tmpNumber, false);

@@ -67,8 +67,6 @@ void setUserTotalNumOfHits(User *user, Choice *winningQueue) {
             }
         }
         updateLNodetotalOfHits(currLNodeQ, totalNumOfHits);
-        printf("\nafter update hits\n");
-        printChoices(currLNodeQ->choices, 6);
         currLNodeQ = currLNodeQ->next;
     }
 

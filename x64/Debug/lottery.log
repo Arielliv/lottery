@@ -1,44 +1,9 @@
 ﻿  choice.c
-C:\Users\ariel7342\Projects\lottery\choice.c(16,34): warning C4028: formal parameter 1 different from declaration
-C:\Users\ariel7342\Projects\lottery\choice.c(31,25): warning C4028: formal parameter 1 different from declaration
-C:\Users\ariel7342\Projects\lottery\choice.c(68,26): warning C4013: 'checkMemoryAllocation' undefined; assuming extern returning int
-C:\Users\ariel7342\Projects\lottery\choice.c(71,33): warning C4013: 'getRandomNum' undefined; assuming extern returning int
-C:\Users\ariel7342\Projects\lottery\choice.c(73,77): warning C4047: 'function': 'PIsNumValid' differs in levels of indirection from 'PIsNumValid *'
-C:\Users\ariel7342\Projects\lottery\choice.c(73,66): warning C4024: 'getNumberInput': different types for formal and actual parameter 3
-C:\Users\ariel7342\Projects\lottery\choice.c(66,1): warning C4047: 'initializing': 'PIsNumValid *' differs in levels of indirection from 'bool (__cdecl *)(int)'
-C:\Users\ariel7342\Projects\lottery\choice.c(65,12): warning C4101: 'j': unreferenced local variable
-  file.c
-C:\Users\ariel7342\Projects\lottery\file.c(20,66): warning C4133: 'function': incompatible types - from 'ListQ *' to 'Choice *'
-C:\Users\ariel7342\Projects\lottery\file.c(186,9): warning C4101: 'currentChoice': unreferenced local variable
-C:\Users\ariel7342\Projects\lottery\file.c(185,9): warning C4101: 'data': unreferenced local variable
-  input.c
-C:\Users\ariel7342\Projects\lottery\input.c(51,26): warning C4013: 'checkMemoryAllocation' undefined; assuming extern returning int
-  listQ.c
-  main.c
-  menu.c
-C:\Users\ariel7342\Projects\lottery\menu.c(23,56): warning C4133: 'function': incompatible types - from 'Choice *' to 'ListQ *'
-C:\Users\ariel7342\Projects\lottery\menu.c(10,1): warning C4047: 'initializing': 'PIsNumValid *' differs in levels of indirection from 'bool (__cdecl *)(int)'
-C:\Users\ariel7342\Projects\lottery\menu.c(43,91): warning C4047: 'function': 'PIsNumValid' differs in levels of indirection from 'PIsNumValid *'
-C:\Users\ariel7342\Projects\lottery\menu.c(43,76): warning C4024: 'getBoolInput': different types for formal and actual parameter 3
-C:\Users\ariel7342\Projects\lottery\menu.c(42,1): warning C4047: 'initializing': 'PIsNumValid *' differs in levels of indirection from 'bool (__cdecl *)(int)'
-C:\Users\ariel7342\Projects\lottery\menu.c(61,87): warning C4047: 'function': 'PIsNumValid' differs in levels of indirection from 'PIsNumValid *'
-C:\Users\ariel7342\Projects\lottery\menu.c(61,72): warning C4024: 'getBoolInput': different types for formal and actual parameter 3
-C:\Users\ariel7342\Projects\lottery\menu.c(62,63): warning C4047: 'function': 'PIsNumValid' differs in levels of indirection from 'PIsNumValid *'
-C:\Users\ariel7342\Projects\lottery\menu.c(62,52): warning C4024: 'getNumberInput': different types for formal and actual parameter 3
-C:\Users\ariel7342\Projects\lottery\menu.c(53,1): warning C4047: 'initializing': 'PIsNumValid *' differs in levels of indirection from 'bool (__cdecl *)(int)'
-C:\Users\ariel7342\Projects\lottery\menu.c(54,1): warning C4047: 'initializing': 'PIsNumValid *' differs in levels of indirection from 'bool (__cdecl *)(int)'
-C:\Users\ariel7342\Projects\lottery\menu.c(119,21): warning C4013: 'printHighestUser' undefined; assuming extern returning int
-  random.c
-C:\Users\ariel7342\Projects\lottery\random.c(6,21): warning C4244: 'function': conversion from 'time_t' to 'unsigned int', possible loss of data
-  user.c
-C:\Users\ariel7342\Projects\lottery\user.c(54,9): warning C4101: 'i': unreferenced local variable
-C:\Users\ariel7342\Projects\lottery\user.c(130,26): warning C4028: formal parameter 1 different from declaration
-C:\Users\ariel7342\Projects\lottery\user.c(130,32): warning C4029: declared formal parameter list different from definition
-C:\Users\ariel7342\Projects\lottery\user.c(145,37): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\ariel7342\Projects\lottery\user.c(169,17): warning C4098: 'updateUserAvarageOfHits': 'void' function returning a value
-  utils.c
-  validations.c
-  Generating Code...
-C:\Users\ariel7342\Projects\lottery\file.c(92): warning C4172: returning address of local variable or temporary: res
-C:\Users\ariel7342\Projects\lottery\file.c(240): warning C4172: returning address of local variable or temporary: res
+C:\Users\ariel7342\Projects\lottery\choice.c(57,26): warning C4013: 'checkMemoryAllocation' undefined; assuming extern returning int
+C:\Users\ariel7342\Projects\lottery\choice.c(60,73): warning C4047: 'function': 'PIsNumValid' differs in levels of indirection from 'PIsNumValid *'
+C:\Users\ariel7342\Projects\lottery\choice.c(60,62): warning C4024: 'getNumberInput': different types for formal and actual parameter 3
+C:\Users\ariel7342\Projects\lottery\choice.c(63,77): warning C4047: 'function': 'PIsNumValid' differs in levels of indirection from 'PIsNumValid *'
+C:\Users\ariel7342\Projects\lottery\choice.c(63,66): warning C4024: 'getNumberInput': different types for formal and actual parameter 3
+C:\Users\ariel7342\Projects\lottery\choice.c(55,1): warning C4047: 'initializing': 'PIsNumValid *' differs in levels of indirection from 'bool (__cdecl *)(int)'
+C:\Users\ariel7342\Projects\lottery\choice.c(76,33): warning C4013: 'getRandomNum' undefined; assuming extern returning int
   lottery.vcxproj -> C:\Users\ariel7342\Projects\lottery\x64\Debug\lottery.exe
