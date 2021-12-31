@@ -2,7 +2,7 @@
 
 #include "file.h"
 
-void createBinaryResultsFile(ListUsers *users, ListQ *winingQ) {
+void createBinaryResultsFile(ListUsers *users, Choice* winingQ) {
     BYTE *compressedData;
     int i = 0;
     User *currUser;
@@ -73,38 +73,11 @@ void writeCompressedQueuesDataToFile(FILE *fpResults, User *user) {
     }
 }
 
-
-BYTE *compressDataOfSingleQueue(FILE *fpResults, Choice *choices) {
-    int i, choice1 = 0, choice2 = 0, byteCounter = 0;
-    BYTE mask = 0, tmp = 0;
-    BYTE res[3];
-
-    for (i = 0; i < 6; i = i + 2) // Create 3 bytes
-    {
-        choice1 = choices[i].data;
-        choice2 = choices[i + 1].data;
-        tmp = (BYTE) choice1 | mask << 4;
-        tmp = (BYTE) choice2 | tmp;
-
-        res[byteCounter] = tmp;
-        byteCounter++;
-    }
-    return res;
-}
-
 int getUserLettersCount(User *user) {
     int res;
     res = (int) strlen(user->name);
     return res;
 }
-
-//void printLotteryResults(FILE * results)
-//{
-//}
-
-
-
-//------------------------------------------- Under Works ----------------------------------
 
 void readFile(ListUsers *users, Choice *winningQ) {
     FILE *fpResults = fopen("lottery.bin", "rb");
@@ -118,6 +91,7 @@ Choice *readWinningQFromFile(FILE *fpResults) {
     int i;
     int *uncompressSingleQueue;
     Choice *choices = (Choice *) malloc(sizeof(Choice) * 6);
+    checkMemoryAllocation(choices);
 
     uncompressSingleQueue = uncompressDataOfSingleQueue(fpResults);
     for (i = 0; i < 6; i++) {
@@ -136,6 +110,8 @@ ListUsers *readUsersListFromFile(FILE *fpResults) {
 
 
     users = (ListUsers *) malloc(sizeof(ListUsers));
+    checkMemoryAllocation(users);
+
     makeEmptyUsersList(users);
     numOfUsers = readNumOfUserFromFile(fpResults);
     for (i = 0; i < numOfUsers; i++) {
@@ -170,6 +146,8 @@ ListQ *readListQOfUserFromFile(FILE *fpResults, int numOfQ) {
     Choice *choices;
 
     listQ = (ListQ *) malloc(sizeof(ListQ));
+    checkMemoryAllocation(listQ);
+
     makeEmptyListQ(listQ);
 
     for (i = 0; i < numOfQ; i++) {
@@ -185,6 +163,8 @@ Choice *readChoicesFromFile(FILE *fpResults) {
     int data;
     int currentChoice;
     Choice *choices = (Choice *) malloc(sizeof(Choice) * 6);
+    checkMemoryAllocation(choices);
+
     uncompressSingleQueue = uncompressDataOfSingleQueue(fpResults);
     for (i = 0; i < 6; i++) {
         Choice tmpChoice;
@@ -220,22 +200,12 @@ char *readNameOfUserFromFile(FILE *fpResults) {
     return name;
 }
 
-int *uncompressDataOfSingleQueue(FILE *fpResults) {
-    int i, choice1 = 0, choice2 = 0;
-    BYTE mask1 = 0xf0;      // 11110000
-    BYTE mask2 = 0x0f;      // 00001111
-    int res[6];
-    BYTE tmp;
-
-    for (i = 0; i < 6; i = i + 2) // unCompress 3 bytes
-    {
-        fread(&tmp, sizeof(BYTE), 1, fpResults);
-
-        choice1 = (tmp + mask1) >> 4;
-        choice2 = (tmp + mask2);
-
-        res[i] = choice1;
-        res[i + 1] = choice2;
+bool checkIfFileExists(FILE* fpResults) {
+    if (fpResults == NULL) {
+        printf(firstTimeMsg);
+        return false;
     }
-    return res;
+    else {
+        return true;
+    }
 }

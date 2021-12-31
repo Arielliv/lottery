@@ -1,9 +1,13 @@
-﻿  choice.c
-C:\Users\ariel7342\Projects\lottery\choice.c(57,26): warning C4013: 'checkMemoryAllocation' undefined; assuming extern returning int
-C:\Users\ariel7342\Projects\lottery\choice.c(60,73): warning C4047: 'function': 'PIsNumValid' differs in levels of indirection from 'PIsNumValid *'
-C:\Users\ariel7342\Projects\lottery\choice.c(60,62): warning C4024: 'getNumberInput': different types for formal and actual parameter 3
-C:\Users\ariel7342\Projects\lottery\choice.c(63,77): warning C4047: 'function': 'PIsNumValid' differs in levels of indirection from 'PIsNumValid *'
-C:\Users\ariel7342\Projects\lottery\choice.c(63,66): warning C4024: 'getNumberInput': different types for formal and actual parameter 3
-C:\Users\ariel7342\Projects\lottery\choice.c(55,1): warning C4047: 'initializing': 'PIsNumValid *' differs in levels of indirection from 'bool (__cdecl *)(int)'
-C:\Users\ariel7342\Projects\lottery\choice.c(76,33): warning C4013: 'getRandomNum' undefined; assuming extern returning int
+﻿  menu.c
+C:\Users\ariel7342\Projects\lottery\menu.c(10,1): warning C4047: 'initializing': 'PIsNumValid *' differs in levels of indirection from 'bool (__cdecl *)(int)'
+C:\Users\ariel7342\Projects\lottery\menu.c(53,91): warning C4047: 'function': 'PIsNumValid' differs in levels of indirection from 'PIsNumValid *'
+C:\Users\ariel7342\Projects\lottery\menu.c(53,76): warning C4024: 'getBoolInput': different types for formal and actual parameter 3
+C:\Users\ariel7342\Projects\lottery\menu.c(52,1): warning C4047: 'initializing': 'PIsNumValid *' differs in levels of indirection from 'bool (__cdecl *)(int)'
+C:\Users\ariel7342\Projects\lottery\menu.c(73,87): warning C4047: 'function': 'PIsNumValid' differs in levels of indirection from 'PIsNumValid *'
+C:\Users\ariel7342\Projects\lottery\menu.c(73,72): warning C4024: 'getBoolInput': different types for formal and actual parameter 3
+C:\Users\ariel7342\Projects\lottery\menu.c(74,63): warning C4047: 'function': 'PIsNumValid' differs in levels of indirection from 'PIsNumValid *'
+C:\Users\ariel7342\Projects\lottery\menu.c(74,52): warning C4024: 'getNumberInput': different types for formal and actual parameter 3
+C:\Users\ariel7342\Projects\lottery\menu.c(63,1): warning C4047: 'initializing': 'PIsNumValid *' differs in levels of indirection from 'bool (__cdecl *)(int)'
+C:\Users\ariel7342\Projects\lottery\menu.c(64,1): warning C4047: 'initializing': 'PIsNumValid *' differs in levels of indirection from 'bool (__cdecl *)(int)'
+C:\Users\ariel7342\Projects\lottery\menu.c(130,21): warning C4013: 'printHighestUser' undefined; assuming extern returning int
   lottery.vcxproj -> C:\Users\ariel7342\Projects\lottery\x64\Debug\lottery.exe

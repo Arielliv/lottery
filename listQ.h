@@ -25,8 +25,6 @@ LNodeQ *createNewLNodeQ(Choice *choices, int totalCountOfHits, LNodeQ *next);
 
 bool isEmptyListQ(ListQ *lst);
 
-void insertNodeToEndListQ(ListQ *lst, LNodeQ *newTail);
-
 int getNumOfLNodeQByNumOfHits(ListQ *lst, int numOfHits);
 
 int getLNodeQNumOfHits(LNodeQ *lNodeQ);
@@ -40,3 +38,5 @@ void bubbleSort(ListQ *lst);
 void swap(LNodeQ *a, LNodeQ *b);
 
 void printListQ(ListQ *lst);
+
+void freeListQ(ListQ* listQ);

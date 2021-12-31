@@ -4,5 +4,5 @@
 
 int getRandomNum(int min, int amount) {
     srand(time(NULL));
-    return (min + rand() % (amount + 1));
+    return (min + rand() % (amount));
 }

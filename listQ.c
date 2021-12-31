@@ -27,6 +27,7 @@ LNodeQ *createNewLNodeQ(Choice *choices, int totalCountOfHits, LNodeQ *next) {
 
     res = (LNodeQ *) malloc(sizeof(LNodeQ));
     checkMemoryAllocation(res);
+
     res->totalCountOfHits = totalCountOfHits;
     res->choices = choices;
     res->next = next;
@@ -107,4 +108,20 @@ void swap(LNodeQ *a, LNodeQ *b) {
     a->totalCountOfHits = b->totalCountOfHits;
     b->choices = tmpChoices;
     b->totalCountOfHits = tmpTotalCountOfHits;
+}
+
+void freeListQ(ListQ* listQ) {
+    if (listQ == NULL) {
+        return;
+    }
+
+    LNodeQ* currentQ = listQ->head;
+    while (currentQ != NULL) {
+        free(currentQ->choices);
+
+        LNodeQ* tmpQ = currentQ;
+        currentQ = currentQ->next;
+        free(tmpQ);
+    }
+    free(listQ);
 }

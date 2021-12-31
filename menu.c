@@ -10,32 +10,42 @@ void showMenu() {
     PIsNumValid *pIsNumValid = isBiggerThenZeroNum;
 
     printf(welcomMsg);
+
     while (userChoice != ExitSign) {
         printf(userChoiceMenuMsg);
         scanf("%d", &userChoice);
+        
         if (userChoice == 1) {
+            system("cls");
             numberOfParticipants = getNumberInput(msgParticipants, errorParticipants, isBiggerThenZeroNum);
             users = setupUsersList(numberOfParticipants);
-            winningQ = setUpUserScore(users);
+            winningQ = getWinningQueuqe();
+            setUpUserScore(users, winningQ);
             printLotteryResults(users, winningQ);
             shouldContinue = getConfirmationTocontinue();
             if (shouldContinue == true) {
                 createBinaryResultsFile(users, winningQ);
             }
+            freeUserList(users);
+            free(winningQ);
         } else if (userChoice == 2) {
+            system("cls");
             FILE *fpResults = fopen("lottery.bin", "rb");
-            checkFile(fpResults);
-            users = readUsersListFromFile(fpResults);
-            winningQ = readWinningQFromFile(fpResults);
-            fclose(fpResults);
-            printLotteryResults(users, winningQ);
+            if (checkIfFileExists(fpResults)) {
+                users = readUsersListFromFile(fpResults);
+                winningQ = readWinningQFromFile(fpResults);
+                fclose(fpResults);
+                setUpUserScore(users, winningQ);
+                printLotteryResults(users, winningQ);
+                freeUserList(users);
+                free(winningQ);
+            }
         } else if (userChoice == 3) {
             return;
         } else {
             printf(userChoiceMenuError);
         }
     }
-
 }
 
 bool getConfirmationTocontinue() {
@@ -54,6 +64,8 @@ ListUsers *setupUsersList(int numberOfParticipants) {
     PIsNumValid *pIsBoolNumValid = isValidBoolNum;
 
     users = (ListUsers *) malloc(sizeof(ListUsers));
+    checkMemoryAllocation(users);
+
     makeEmptyUsersList(users);
 
     for (i = 0; i < numberOfParticipants; i++) {
@@ -70,6 +82,8 @@ ListUsers *setupUsersList(int numberOfParticipants) {
 
 ListQ *createListOfUserQs(bool isAutoLottery, int numOfUserQs) {
     ListQ *listQ = (ListQ *) malloc(sizeof(ListQ));
+    checkMemoryAllocation(listQ);
+
     makeEmptyListQ(listQ);
 
     fillUserQs(isAutoLottery, numOfUserQs, listQ);
@@ -89,32 +103,29 @@ void fillUserQs(bool isAutoLottery, int numOfUserQs, ListQ *listQ) {
         insertDataToEndListQ(listQ, queue, 0);
     }
 }
-
-Choice *setUpUserScore(ListUsers *users) {
-    User *curr = users->head;
-    Choice *winningQueue = NULL;
+Choice* getWinningQueuqe() {
+    Choice* winningQueue = NULL;
     raffleWinningQueue(&winningQueue);
+    return winningQueue;
+}
 
+void setUpUserScore(ListUsers *users, Choice* winningQueue) {
+    User *curr = users->head;
     while (curr != NULL) {
         setUserTotalNumOfHits(curr, winningQueue);
         updateUserAvarageOfHits(curr);
         curr = curr->next;
     }
-
-    return winningQueue;
 }
 
 void raffleWinningQueue(Choice **winningQueue) {
     autoFillQ(winningQueue);
 }
 
-
 void printLotteryResults(ListUsers *users, Choice *winningQ) {
     printf("Here is the winning queue : \n");
     printChoicesData(winningQ, 6);
-
     sortUsersListQs(users);
     printUserListQ(users);
-
     printHighestUser(users);
 }

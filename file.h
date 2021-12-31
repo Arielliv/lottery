@@ -1,14 +1,15 @@
 #pragma once
 
 #include "user.h"
+#include "compress.h"
 #include "choice.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-typedef unsigned char BYTE;
+#define firstTimeMsg "First game just started, there are no results to share yet...\n"
 
-void createBinaryResultsFile(ListUsers *users, ListQ *winingQ);
+void createBinaryResultsFile(ListUsers *users, Choice* winingQ);
 
 void writeCountOfParticipants(FILE *fpResults, ListUsers *users);
 
@@ -22,10 +23,6 @@ void writeNameOfUserToFile(FILE *fpResults, User *currUser);
 
 void writeCompressedQueuesDataToFile(FILE *fpResults, User *user);
 
-
-BYTE *compressDataOfSingleQueue(FILE *fpResults, Choice *choices);
-
-
 int getUserLettersCount(User *user);
 
 int readNumOfUserFromFile(FILE *fpResults);
@@ -33,8 +30,6 @@ int readNumOfUserFromFile(FILE *fpResults);
 int readLettersCountToFile(FILE *fpResults);
 
 char *readNameOfUserFromFile(FILE *fpResults);
-
-int *uncompressDataOfSingleQueue(FILE *fpResults);
 
 User *createUserFromFile(FILE *fpResults);
 
@@ -49,3 +44,4 @@ ListUsers *readUsersListFromFile(FILE *fpResults);
 Choice *readWinningQFromFile(FILE *fpResults);
 
 void readFile(ListUsers *users, Choice *winningQ);
+bool checkIfFileExists(FILE* fpResults);

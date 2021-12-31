@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="choice.c" />
+    <ClCompile Include="compress.c" />
     <ClCompile Include="file.c" />
     <ClCompile Include="input.c" />
     <ClCompile Include="listQ.c" />
@@ -152,6 +153,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="choice.h" />
+    <ClInclude Include="compress.h" />
     <ClInclude Include="file.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="listQ.h" />

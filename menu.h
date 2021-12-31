@@ -4,9 +4,9 @@
 #define auto 0
 #define ExitSign 3
 
-#define welcomMsg "welcome to out grand lottery game !!!\n"
-#define userChoiceMenuMsg "\nPlease choose one of the following options and enter it's number:\n\n1 - choose number of participants in the lottery\n\n2 - show last lottery results\n\n3 - exit\n"
-#define userChoiceMenuError "wrong input - try again.\n"
+#define welcomMsg "Welcome to our grand lottery game !!!\n"
+#define userChoiceMenuMsg "\nPlease choose one of the following options and enter its number:\n\n1 - choose number of participants in the lottery\n\n2 - show last lottery results\n\n3 - exit\n"
+#define userChoiceMenuError "Wrong input - try again.\n"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -28,7 +28,9 @@ ListUsers *setupUsersList(int numberOfParticipants);
 
 void fillUserQs(bool isAutoLottery, int numOfUserQs, ListQ *listQ);
 
-Choice *setUpUserScore(ListUsers *users);
+Choice* getWinningQueuqe();
+
+void setUpUserScore(ListUsers* users, Choice* winningQueue);
 
 void raffleWinningQueue(Choice **winningQueue);
 

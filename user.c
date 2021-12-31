@@ -121,14 +121,6 @@ void sortUsersListQs(ListUsers *listOfUsers) {
     }
 }
 
-void updateUserNumOfQs(int numOfQs, User *user) {
-    user->numOfQs = numOfQs;
-}
-
-int getUserNumOfQs(User *user) {
-    return user->numOfQs;
-}
-
 
 User *getUserWithHighestScore(ListUsers *ListOfUsers) {
     User *winner = NULL;
@@ -188,4 +180,19 @@ int getCountOfParticipants(ListUsers *lst) {
     }
 
     return count;
+}
+
+void freeUserList(ListUsers* users) {
+    if (users == NULL) {
+        return;
+    }
+
+    User* currentUser = users->head;
+    while (currentUser != NULL) {
+        freeListQ(currentUser->listQ);
+        User* tmpUser = currentUser;
+        currentUser = currentUser->next;
+        free(tmpUser);
+    }
+    free(users);
 }

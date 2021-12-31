@@ -20,8 +20,6 @@ bool checkIfChoiceWasHit(Choice *choice);
 
 Choice *getChoiceByDataFromArray(Choice *choices, int length, int data);
 
-void freeChoicesArray(Choice *choices, int length);
-
 bool isChoiceInArray(Choice *choiceArray, int size, Choice choice);
 
 void printChoiceData(Choice choice);
