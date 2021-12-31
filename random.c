@@ -3,7 +3,10 @@
 
 #include "random.h"
 
-int getRandomNum(int min, int amount) {
+void initRandomize() {
     srand(time(NULL));
+}
+
+int getRandomNum(int min, int amount) {
     return (min + rand() % (amount));
 }

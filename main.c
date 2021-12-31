@@ -4,5 +4,6 @@
 #include "menu.h"
 
 void main() {
+    initRandomize();
     showMenu();
 }

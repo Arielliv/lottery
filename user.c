@@ -102,7 +102,7 @@ void printUserListQ(ListUsers *listOfUsers) {
     User *currUser = listOfUsers->head;
 
     while (currUser != NULL) {
-        printf("\n\n\n %s number %d, here are your queues by highest score to loweset: \n", currUser->name,
+        printf("\n\n %s number %d, here are your queues by highest score to loweset: \n", currUser->name,
                userCounter);
         printListQ(currUser->listQ);
         currUser = currUser->next;
