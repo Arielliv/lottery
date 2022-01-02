@@ -22,18 +22,24 @@
 
 void showMenu();
 
+// Creates a list of queues
 ListQ *createListOfUserQs(bool isAutoLottery, int numOfUserQs);
 
+// Gets a number of participants and creates a new list of users for it
 ListUsers *setupUsersList(int numberOfParticipants);
 
+// Fills the queues according to his choice to do it manually or automatic
 void fillUserQs(bool isAutoLottery, int numOfUserQs, ListQ *listQ);
 
-Choice* getWinningQueuqe();
+// Builds a winning queue and returns its pointer
+Choice *getWinningQueuqe();
 
-void setUpUserScore(ListUsers* users, Choice* winningQueue);
+void setUpUserScore(ListUsers *users, Choice *winningQueue);
 
+// Raffles the values of a winning queue to compare game's results to
 void raffleWinningQueue(Choice **winningQueue);
 
 void printLotteryResults(ListUsers *users, Choice *winningQ);
 
+// Asks the user if he would like to continue the game
 bool getConfirmationTocontinue();

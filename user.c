@@ -183,15 +183,15 @@ int getCountOfParticipants(ListUsers *lst) {
     return count;
 }
 
-void freeUserList(ListUsers* users) {
-    if (users == NULL) {
+void freeUserList(ListUsers *users) {
+    if (users == NULL || isEmptyListUsers(users)) {
         return;
     }
 
-    User* currentUser = users->head;
+    User *currentUser = users->head;
     while (currentUser != NULL) {
         freeListQ(currentUser->listQ);
-        User* tmpUser = currentUser;
+        User *tmpUser = currentUser;
         currentUser = currentUser->next;
         free(tmpUser);
     }

@@ -3,7 +3,7 @@
 
 #include "file.h"
 
-void createBinaryResultsFile(ListUsers *users, Choice* winingQ) {
+void createBinaryResultsFile(ListUsers *users, Choice *winingQ) {
     BYTE *compressedData;
     int i = 0;
     User *currUser;
@@ -201,12 +201,11 @@ char *readNameOfUserFromFile(FILE *fpResults) {
     return name;
 }
 
-bool checkIfFileExists(FILE* fpResults) {
+bool checkIfFileExists(FILE *fpResults) {
     if (fpResults == NULL) {
         printf(firstTimeMsg);
         return false;
-    }
-    else {
+    } else {
         return true;
     }
 }

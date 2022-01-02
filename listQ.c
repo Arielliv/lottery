@@ -111,16 +111,16 @@ void swap(LNodeQ *a, LNodeQ *b) {
     b->totalCountOfHits = tmpTotalCountOfHits;
 }
 
-void freeListQ(ListQ* listQ) {
+void freeListQ(ListQ *listQ) {
     if (listQ == NULL) {
         return;
     }
 
-    LNodeQ* currentQ = listQ->head;
+    LNodeQ *currentQ = listQ->head;
     while (currentQ != NULL) {
         free(currentQ->choices);
 
-        LNodeQ* tmpQ = currentQ;
+        LNodeQ *tmpQ = currentQ;
         currentQ = currentQ->next;
         free(tmpQ);
     }

@@ -5,9 +5,9 @@
 
 void showMenu() {
     int userChoice = 0, numberOfParticipants;
-    bool shouldContinue = false;
-    ListUsers *users;
-    Choice *winningQ;
+    bool shouldContinue = false, unStoredResults = false;
+    ListUsers *users = NULL;
+    Choice *winningQ = NULL;
     PIsNumValid *pIsNumValid = isBiggerThenZeroNum;
 
     printf(welcomMsg);
@@ -15,7 +15,7 @@ void showMenu() {
     while (userChoice != ExitSign) {
         printf(userChoiceMenuMsg);
         scanf("%d", &userChoice);
-        
+
         if (userChoice == 1) {
             system("cls");
             numberOfParticipants = getNumberInput(msgParticipants, errorParticipants, isBiggerThenZeroNum);
@@ -26,22 +26,31 @@ void showMenu() {
             shouldContinue = getConfirmationTocontinue();
             if (shouldContinue == true) {
                 createBinaryResultsFile(users, winningQ);
+            } else {
+                unStoredResults = true;
             }
-            freeUserList(users);
-            free(winningQ);
         } else if (userChoice == 2) {
             system("cls");
-            FILE *fpResults = fopen("lottery.bin", "rb");
-            if (checkIfFileExists(fpResults)) {
-                users = readUsersListFromFile(fpResults);
-                winningQ = readWinningQFromFile(fpResults);
-                fclose(fpResults);
-                setUpUserScore(users, winningQ);
+            if (unStoredResults == true) {
                 printLotteryResults(users, winningQ);
+                unStoredResults = false;
+            } else {
+                FILE *fpResults = fopen("lottery.bin", "rb");
+                if (checkIfFileExists(fpResults)) {
+                    users = readUsersListFromFile(fpResults);
+                    winningQ = readWinningQFromFile(fpResults);
+                    fclose(fpResults);
+                    setUpUserScore(users, winningQ);
+                    printLotteryResults(users, winningQ);
+                    freeUserList(users);
+                    free(winningQ);
+                }
+            }
+        } else if (userChoice == 3) {
+            if (unStoredResults == true) {
                 freeUserList(users);
                 free(winningQ);
             }
-        } else if (userChoice == 3) {
             return;
         } else {
             printf(userChoiceMenuError);
@@ -104,13 +113,14 @@ void fillUserQs(bool isAutoLottery, int numOfUserQs, ListQ *listQ) {
         insertDataToEndListQ(listQ, queue, 0);
     }
 }
-Choice* getWinningQueuqe() {
-    Choice* winningQueue = NULL;
+
+Choice *getWinningQueuqe() {
+    Choice *winningQueue = NULL;
     raffleWinningQueue(&winningQueue);
     return winningQueue;
 }
 
-void setUpUserScore(ListUsers *users, Choice* winningQueue) {
+void setUpUserScore(ListUsers *users, Choice *winningQueue) {
     User *curr = users->head;
     while (curr != NULL) {
         setUserTotalNumOfHits(curr, winningQueue);

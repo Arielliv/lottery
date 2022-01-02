@@ -1,5 +1,14 @@
-﻿  user.c
-C:\Users\ariel7342\Projects\lottery\user.c(55,9): warning C4101: 'i': unreferenced local variable
-C:\Users\ariel7342\Projects\lottery\user.c(136,37): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\ariel7342\Projects\lottery\user.c(160,17): warning C4098: 'updateUserAvarageOfHits': 'void' function returning a value
+﻿  menu.c
+C:\Users\ariel7342\Projects\lottery\menu.c(45,33): warning C4013: 'freeUserList' undefined; assuming extern returning int
+C:\Users\ariel7342\Projects\lottery\menu.c(11,1): warning C4047: 'initializing': 'PIsNumValid *' differs in levels of indirection from 'bool (__cdecl *)(int)'
+C:\Users\ariel7342\Projects\lottery\menu.c(63,91): warning C4047: 'function': 'PIsNumValid' differs in levels of indirection from 'PIsNumValid *'
+C:\Users\ariel7342\Projects\lottery\menu.c(63,76): warning C4024: 'getBoolInput': different types for formal and actual parameter 3
+C:\Users\ariel7342\Projects\lottery\menu.c(62,1): warning C4047: 'initializing': 'PIsNumValid *' differs in levels of indirection from 'bool (__cdecl *)(int)'
+C:\Users\ariel7342\Projects\lottery\menu.c(83,87): warning C4047: 'function': 'PIsNumValid' differs in levels of indirection from 'PIsNumValid *'
+C:\Users\ariel7342\Projects\lottery\menu.c(83,72): warning C4024: 'getBoolInput': different types for formal and actual parameter 3
+C:\Users\ariel7342\Projects\lottery\menu.c(84,63): warning C4047: 'function': 'PIsNumValid' differs in levels of indirection from 'PIsNumValid *'
+C:\Users\ariel7342\Projects\lottery\menu.c(84,52): warning C4024: 'getNumberInput': different types for formal and actual parameter 3
+C:\Users\ariel7342\Projects\lottery\menu.c(73,1): warning C4047: 'initializing': 'PIsNumValid *' differs in levels of indirection from 'bool (__cdecl *)(int)'
+C:\Users\ariel7342\Projects\lottery\menu.c(74,1): warning C4047: 'initializing': 'PIsNumValid *' differs in levels of indirection from 'bool (__cdecl *)(int)'
+C:\Users\ariel7342\Projects\lottery\menu.c(141,21): warning C4013: 'printHighestUser' undefined; assuming extern returning int
   lottery.vcxproj -> C:\Users\ariel7342\Projects\lottery\x64\Debug\lottery.exe

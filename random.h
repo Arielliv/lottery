@@ -4,6 +4,3 @@
 #include <time.h>
 
 int getRandomNum(int min, int amount);
-
-
-

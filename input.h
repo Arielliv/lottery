@@ -4,7 +4,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-
 #define msgQChoice  "Please enter a value:\n"
 #define errorQChoice "Wrong input - try again. \nChoose a unique number between 1-15.\n"
 #define msgQ "Please enter desired number of lottery queues :\n"
@@ -16,12 +15,14 @@
 #define continueGameMsg "\nSo, would you like to try another round and save your results?\n 1- No\n\n 2- Yes\n"
 #define continueGameError "Wrong input - try again.\n"
 
-typedef bool (*PIsNumValid)(int);
+typedef bool(*PIsNumValid)(int);
 
 int getNumberInput(char *msg, char *error, PIsNumValid cb);
 
 bool getBoolInput(char *msg, char *error, PIsNumValid cb);
 
+// Gets an input of a participant name
 char *getParticipantName();
 
+// The 'getParticipantName' function uses this to receive and return the name of the user
 char *getDynamicStringInput();
